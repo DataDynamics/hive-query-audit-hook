@@ -15,7 +15,7 @@
 
 ### `hive-site.xml`
 
-```
+```xml
 <property>
   <name>hive.exec.pre.hooks</name>
   <value>io.datadynamics.hive.hook.QueryAuditHook</value> 
