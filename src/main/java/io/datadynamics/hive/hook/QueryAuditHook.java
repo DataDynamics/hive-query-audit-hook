@@ -16,6 +16,11 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
+/**
+ * Hive Query를 수집하는 Audit Hook
+ *
+ * @author KIM BYOUNG GON (support@data-dynamics.io)
+ */
 public class QueryAuditHook implements ExecuteWithHookContext {
 
     private static final Logger LOG = LoggerFactory.getLogger(ExecuteWithHookContext.class);
