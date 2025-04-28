@@ -77,7 +77,7 @@
 ```xml
 <property>
   <name>hive.aux.jars.path</name>
-  <value>hdfs:///user/hive/hooks/my-hive-hook-1.0.jar,file:///opt/custom_hive_jars/another-library.jar</value>
+  <value>/opt/lib-ext/</value>
   <description>HDFS 및 로컬 파일 시스템의 보조 JAR 경로</description>
 </property>
 ```

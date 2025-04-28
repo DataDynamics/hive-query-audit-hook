@@ -85,9 +85,16 @@ public class QueryAuditHook implements ExecuteWithHookContext {
                         "query", queryString,
                         "status", "SUCCESS"
                 );
-                helper.post(targetUrl, success, Map.class);
 
-                LOG.info("[SUCCESS] QueryId: {}, User: {}, EndTime: {}, DurationMs: {}, Query: {}", queryId, user, postEndTimeStr, postDuration, queryString);
+                LOG.debug("Hive Query Audit을 송신할 메시지: {}", success);
+
+                try {
+                    helper.post(targetUrl, success, Map.class);
+                    LOG.info("[SUCCESS] QueryId: {}, User: {}, EndTime: {}, DurationMs: {}, Query: {}", queryId, user, postEndTimeStr, postDuration, queryString);
+                } catch (Exception e) {
+                    LOG.warn("Hive Query Audit을 송신할 수 없습니다. 원인: {}", e.getMessage(), e);
+                }
+
                 break;
 
             case ON_FAILURE_HOOK: // 쿼리 실패 시점 및 소요 시간, 에러 메시지 기록
@@ -110,9 +117,16 @@ public class QueryAuditHook implements ExecuteWithHookContext {
                         "query", queryString,
                         "status", "FAILED"
                 );
-                helper.post(targetUrl, failed, Map.class);
 
-                LOG.warn("[FAILURE] QueryId: {}, User: {}, EndTime: {}, DurationMs: {}, Error: {}, Query: {}", queryId, user, failEndTimeStr, failDuration, errorMsg, queryString);
+                LOG.debug("Hive Query Audit을 송신할 메시지: {}", failed);
+
+                try {
+                    helper.post(targetUrl, failed, Map.class);
+                    LOG.warn("[FAILURE] QueryId: {}, User: {}, EndTime: {}, DurationMs: {}, Error: {}, Query: {}", queryId, user, failEndTimeStr, failDuration, errorMsg, queryString);
+                } catch(Exception e) {
+                    LOG.warn("Hive Query Audit을 송신할 수 없습니다. 원인: {}", e.getMessage(), e);
+                }
+
                 break;
 
             default:
