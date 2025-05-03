@@ -79,8 +79,8 @@ public class QueryAuditHook implements ExecuteWithHookContext {
                 Map success = Map.of(
                         "queryId", queryId,
                         "user", user,
-                        "startTime", postStartTime,
-                        "endTime", postEndTime,
+                        "startTime", String.valueOf(postStartTime),
+                        "endTime", String.valueOf(postEndTime),
                         "durationMs", postDuration,
                         "query", queryString,
                         "status", "SUCCESS"
@@ -110,8 +110,8 @@ public class QueryAuditHook implements ExecuteWithHookContext {
                 Map failed = Map.of(
                         "queryId", queryId,
                         "user", user,
-                        "startTime", failStartTime,
-                        "endTime", failEndTimeStr,
+                        "startTime", String.valueOf(failStartTime),
+                        "endTime", String.valueOf(failEndTime),
                         "durationMs", failDuration,
                         "errorMsg", errorMsg,
                         "query", queryString,
